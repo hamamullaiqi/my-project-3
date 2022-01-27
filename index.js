@@ -247,7 +247,7 @@ app.get('/blog', function(req, res){
                 return {
                     ...data,
                     isLogin : req.session.isLogin,
-                    postAt : getFullTime(new Date()),
+                    postAt : getFullTime(data.post_at),
                     distance : getDistanceTime(data.post_at)
                 }
             })
@@ -298,20 +298,21 @@ app.get('/blog-detail/(:id)', function(req, res){
     db.connect(function(err, client, done){
         if(err) throw err
 
-        client.query(`SELECT * FROM tb_blog WHERE id=${id}`, function(err, result){
+        client.query(`SELECT * FROM tb_blog LEFT JOIN tb_user ON tb_blog.author_id = tb_user.id WHERE tb_blog.id=${id}`, function(err, result){
             if(err) throw err
 
             
             let data = result.rows[0]
-            let postAt = getFullTime(new Date())
+            let postAt = getFullTime(data.post_at)
+            
+            
+
+            
+            
 
             
 
-            // console.log(data);
-
-            
-
-            res.render('blog-detail', {id:id, blogs:data, postAt:postAt})
+            res.render('blog-detail', {id:id, blogs:data, postAt:postAt,})
         })
     })
 
