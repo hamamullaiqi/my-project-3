@@ -6,7 +6,7 @@ const flash = require('express-flash')
 const upload = require('./middlewares/fileUpload')
 const fs = require('fs')
 
-const MemoryStore = require('memorystore')(session)
+// const MemoryStore = require('memorystore')(session)
 
 
 
@@ -30,10 +30,10 @@ app.use(
     session({
         cookie :  {
             maxAge : 2 * 60 * 60 * 1000, //session max 2 jam
-            secure : true,
+            secure : false,
             httpOnly : true
         },
-        store : new MemoryStore(),
+        store : new session.MemoryStore(),
         saveUninitialized : true,
         resave: false,
         secret: 'secretValue'
