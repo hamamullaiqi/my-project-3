@@ -14,5 +14,17 @@ const { Pool, Client } = require('pg')
 //     password : 'admin'
 // })
 
+var client = new Client({
+    user: "zgcnminxzgzaih",
+    password: "d6a994a39b6902c0f7e68e7ea897a6f6262ba1c671e130ad5962db5a556ff22c",
+    database: "deoin7b7vl87m",
+    port: 5432,
+    host: "ec2-23-20-73-25.compute-1.amazonaws.com",
+    ssl: true
+});
+client.connect(function () {
+    console.log("connected");
+});
+
 module.exports = dbPool
 
