@@ -5,8 +5,8 @@ const session = require('express-session')
 const flash = require('express-flash')
 const upload = require('./middlewares/fileUpload')
 const fs = require('fs')
-const { user } = require('pg/lib/defaults')
-const { log } = require('console')
+
+const MemoryStore = require('memorystore')(session)
 
 
 const app = express()
@@ -27,10 +27,10 @@ app.use(
     session({
         cookie :  {
             maxAge : 2 * 60 * 60 * 1000, //session max 2 jam
-            secure : false,
+            secure : true,
             httpOnly : true
         },
-        store : new session.MemoryStore(),
+        store : new MemoryStore(),
         saveUninitialized : true,
         resave: false,
         secret: 'secretValue'
