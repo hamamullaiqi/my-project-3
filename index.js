@@ -9,8 +9,11 @@ const fs = require('fs')
 const MemoryStore = require('memorystore')(session)
 
 
+
 const app = express()
 const PORT = process.env.PORT || 4000
+
+
 
 //set hbs view engine
 app.set('view engine', 'hbs')
